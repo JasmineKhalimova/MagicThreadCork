@@ -1,9 +1,9 @@
 <?php
 
-/* All rights reserved Web-brick design author:Jasmine Khalimova */
+/* 2016 all rights reserved by web-brick design, author: Jasmine Khalimova */
 
-$to = "trendhealthandbeauty@gmail.com";
-$subject = "New booking from trendhealthandbeauty.com";
+$to = "jasmine.jass912@gmail.com";
+$subject = "New message from magicthread.com";
 $errorMessages = array();
 $name = $phone = $emailBody = $fromEmail = "";
 
@@ -43,20 +43,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (!empty($errorMessages)) {
+    $success = "Message Sending Failed, try again";
       // Your message was not sent
-      redirect("../index.html");
+      redirect("../index.php?responseMessage=Your message was not sent. Please email us at info@trendhealthandbeauty.com.#form");
   }
   else {
     $headers = "From: ".$name." <".$fromEmail.">";
     $emailBody = "Name: ".$name."\nEmail: ".$fromEmail."\nPhone: ".$phone."\n\n".$emailBody;
     if (mail($to, $subject, $emailBody, $headers)) {
-      redirect("../index.html");
+       $success = "Message successfully sent";
+      redirect("../index.php?responseMessage=Your message was sent. We will get back to you soon.#form");
     }
   }
 }
 else {
+  $success = "Message Sending Failed, try again";
   // "Your message was not sent
-  redirect("../index.html");
+  redirect("../index.php?responseMessage=Your message was not sent. Please email us at info@trendhealthandbeauty.com.#form");
 }
 
 /* Generic form processing:
